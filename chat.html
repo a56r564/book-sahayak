@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Sahayak - Chat</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="chat-page">
+
+    <!-- =========================================
+         CHAT APPLICATION
+    ========================================== -->
+
+    <div class="chat-app">
+
+        <!-- =====================================
+             CHAT HEADER
+        ====================================== -->
+
+        <header class="chat-header">
+
+            <!-- BACK -->
+            <button
+                type="button"
+                id="backBtn"
+                class="chat-back-btn"
+                aria-label="Go back"
+                title="Go back"
+            >
+                ←
+            </button>
+
+
+            <!-- USER -->
+            <div class="chat-header-info">
+
+                <div class="chat-avatar">
+                    👤
+                </div>
+
+                <div class="chat-user-details">
+                    <strong id="sellerName">Seller</strong>
+                    <span id="chatStatus">Online</span>
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT ACTIONS -->
+            <div class="chat-header-actions">
+
+                <!-- SEARCH -->
+                <button
+                    type="button"
+                    id="chatSearchBtn"
+                    class="chat-action-btn"
+                    aria-label="Search messages"
+                    title="Search messages"
+                >
+                    🔍
+                </button>
+
+
+                <!-- HEADER MORE -->
+                <button
+                    type="button"
+                    id="chatMoreBtn"
+                    class="chat-action-btn"
+                    aria-label="More options"
+                    title="More options"
+                >
+                    ⋮
+                </button>
+
+
+                <!-- THEME -->
+                <button
+                    type="button"
+                    id="themeBtn"
+                    class="chat-theme-btn"
+                    aria-label="Toggle theme"
+                    title="Toggle theme"
+                >
+                    🌙
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             RESOURCE / BOOK CARD
+        ====================================== -->
+
+        <section class="chat-material">
+
+            <div class="chat-material-icon">
+                📚
+            </div>
+
+            <div class="chat-material-info">
+
+                <span class="material-label">
+                    DISCUSSING RESOURCE
+                </span>
+
+                <strong id="materialTitle">
+                    Loading...
+                </strong>
+
+                <p id="materialPrice">
+                    --
+                </p>
+
+            </div>
+
+            <div class="material-chat-indicator">
+                💬
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+     CHAT BODY
+====================================== -->
+
+<main class="chat-main">
+
+    <div
+        id="messagesContainer"
+        class="messages-container"
+    >
+        <div class="chat-loading">
+            <div class="loading-spinner"></div>
+            <span>Loading messages...</span>
+        </div>
+    </div>
+
+</main>
+
+
+<!-- =====================================
+     MESSAGE COMPOSER
+====================================== -->
+
+<div class="message-composer-wrapper">
+
+    <div class="message-input-area">
+
+        <button
+            type="button"
+            id="messageOptionsBtn"
+            class="attachment-btn"
+            aria-label="Message options"
+            title="Message options"
+        >
+            ⋮
+        </button>
+
+        <div class="message-input-wrapper">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type a message..."
+                autocomplete="off"
+                maxlength="1000"
+                aria-label="Message"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            id="sendBtn"
+            class="send-message-btn"
+            aria-label="Send message"
+            title="Send message"
+        >
+            ➤
+        </button>
+
+    </div>
+
+    <div class="composer-hint">
+        Press Enter to send
+    </div>
+
+</div>
+
+        <!-- =====================================
+             CHAT OPTIONS MENU
+        ====================================== -->
+
+        <div
+            id="chatMenu"
+            class="chat-menu"
+            aria-hidden="true"
+        >
+
+            <button
+                type="button"
+                id="clearChatBtn"
+            >
+                🗑️ Clear chat
+            </button>
+
+            <button
+                type="button"
+                id="closeChatMenuBtn"
+            >
+                ✕ Close
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             SEARCH BAR
+        ====================================== -->
+
+        <div
+            id="chatSearchBar"
+            class="chat-search-bar"
+        >
+
+            <button
+                type="button"
+                id="closeSearchBtn"
+                aria-label="Close search"
+            >
+                ←
+            </button>
+
+
+            <input
+                type="text"
+                id="chatSearchInput"
+                placeholder="Search messages..."
+                autocomplete="off"
+            >
+
+
+            <span id="searchResultCount">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script
+        type="module"
+        src="chat.js"
+    ></script>
+
+</body>
+
+</html>

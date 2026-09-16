@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Sahayak - List Resource</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo-area">
+
+        <button
+            type="button"
+            class="nav-back-btn"
+            onclick="window.location.href='home.html'"
+            aria-label="Back to Home"
+        >
+            ←
+        </button>
+
+
+        <div class="logo">
+
+            <span class="logo-icon">
+                📚
+            </span>
+
+            <span>
+                Book Sahayak
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="home.html">
+            Home
+        </a>
+
+        <a href="upload.html" class="active">
+            List Resource
+        </a>
+
+        <a href="my-materials.html">
+            My Listings
+        </a>
+
+
+        <button
+            id="themeBtn"
+            class="theme-btn"
+            type="button"
+        >
+            🌙 Dark
+        </button>
+
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            type="button"
+        >
+            Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= MAIN PAGE ================= -->
+
+<main class="listing-page">
+
+
+    <!-- PAGE INTRO -->
+
+    <div class="listing-intro">
+
+        <p class="small-heading">
+            CREATE A LISTING
+        </p>
+
+        <h1>
+            List your resource
+        </h1>
+
+        <p>
+            Sell a book or share useful study material
+            with fellow students.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================= TWO COLUMN LAYOUT ================= -->
+
+    <div class="listing-layout">
+
+
+        <!-- ================= FORM CARD ================= -->
+
+        <section class="listing-form-card">
+
+
+            <!-- RESOURCE DETAILS -->
+
+            <div class="form-section">
+
+                <h2>
+                    Resource Details
+                </h2>
+
+                <p>
+                    Tell students what you are offering.
+                </p>
+
+
+                <!-- TITLE -->
+
+                <label for="title">
+                    Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="e.g. Engineering Mathematics Textbook"
+                    required
+                >
+
+
+                <!-- CATEGORY + SUBJECT -->
+
+                <div class="form-row">
+
+
+                    <div>
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select id="category">
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Books">
+                                📚 Books
+                            </option>
+
+                            <option value="Notes">
+                                📝 Notes
+                            </option>
+
+                            <option value="PYQs">
+                                📄 PYQs
+                            </option>
+
+                            <option value="Lab Files">
+                                💻 Lab Files
+                            </option>
+
+                            <option value="Other">
+                                🎓 Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="subject">
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subject"
+                            placeholder="e.g. DBMS"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                
+
+
+
+                <!-- DESCRIPTION -->
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="6"
+                    placeholder="Describe the book or resource. Mention important details, edition, topics covered, etc."
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- ================= PRICE & CONDITION ================= -->
+
+            <div class="form-section">
+
+                <h2>
+                    Price & Condition
+                </h2>
+
+                <p>
+                    Set a price if you are selling a physical item.
+                </p>
+
+
+                <div class="form-row">
+
+
+                    <!-- PRICE -->
+
+                    <div>
+
+                        <label for="price">
+                            Price
+                        </label>
+
+                        <div class="price-input">
+
+                            <span>
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="price"
+                                min="0"
+                                placeholder="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONDITION -->
+
+                    <div>
+
+                        <label for="condition">
+                            Condition
+                        </label>
+
+                        <select id="condition">
+
+                            <option value="">
+                                Select condition
+                            </option>
+
+                            <option value="New">
+                                New
+                            </option>
+
+                            <option value="Like New">
+                                Like New
+                            </option>
+
+                            <option value="Good">
+                                Good
+                            </option>
+
+                            <option value="Fair">
+                                Fair
+                            </option>
+
+                            <option value="Digital">
+                                Digital Resource
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FREE OPTION -->
+
+                <label class="free-option">
+
+                    <input
+                        type="checkbox"
+                        id="isFree"
+                    >
+
+                    <span>
+                        This resource is free
+                    </span>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- ================= FILE UPLOAD ================= -->
+
+            <div class="form-section">
+
+                <h2>
+                    Resource File
+                </h2>
+
+                <p>
+                    Upload the PDF or document if this is
+                    a digital resource.
+                </p>
+
+
+                <label class="file-upload">
+
+                    <input
+                        type="file"
+                        id="file"
+                        accept=".pdf,.doc,.docx,.ppt,.pptx"
+                    >
+
+                    <span class="file-icon">
+                        📎
+                    </span>
+
+                    <strong>
+                        Choose a file
+                    </strong>
+
+                    <small>
+                        PDF, DOC, DOCX, PPT or PPTX
+                    </small>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- ================= PUBLISH BUTTON ================= -->
+
+            <button
+                type="button"
+                id="submitListingBtn"
+                class="publish-btn"
+            >
+                Publish Listing →
+            </button>
+
+
+            <p id="message"></p>
+
+
+
+            <!-- BACK LINK -->
+
+            <button
+                type="button"
+                id="backBtn"
+                class="back-link"
+            >
+                ← Back to Home
+            </button>
+
+
+        </section>
+
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="listing-sidebar">
+
+
+            <!-- TIPS -->
+
+            <div class="seller-tip">
+
+                <div class="tip-icon">
+                    💡
+                </div>
+
+                <h3>
+                    Tips for a good listing
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Use a clear and specific title.
+                    </li>
+
+                    <li>
+                        Mention the book edition or important details.
+                    </li>
+
+                    <li>
+                        Be honest about the condition.
+                    </li>
+
+                    <li>
+                        Keep the price reasonable.
+                    </li>
+
+                    <li>
+                        Upload the resource file when applicable.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- PREVIEW -->
+
+            <div class="listing-preview">
+
+                <span>
+                    PREVIEW
+                </span>
+
+
+                <div class="preview-icon">
+                    📚
+                </div>
+
+
+                <h3>
+                    Your listing
+                </h3>
+
+
+                <p>
+                    Your resource will appear here after publishing.
+                </p>
+
+
+                <div class="preview-badge">
+                    Student Marketplace
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="site-footer">
+
+    <div>
+        📚 <strong>Book Sahayak</strong>
+    </div>
+
+    <p>
+        A simple marketplace for students.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script type="module" src="upload.js"></script>
+
+
+</body>
+
+</html>

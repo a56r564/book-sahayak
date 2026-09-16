@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Search - Book Sahayak</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body class="search-page">
+
+
+    <!-- SEARCH HEADER -->
+
+    <header class="search-header">
+
+        <button
+            type="button"
+            class="search-back-btn"
+            id="backSearchBtn"
+        >
+            ←
+        </button>
+
+
+        <div class="search-brand">
+
+            <span>
+                📚
+            </span>
+
+            <strong>
+                Book Sahayak
+            </strong>
+
+        </div>
+
+
+        <button
+    type="button"
+    id="searchThemeBtn"
+    class="search-theme-btn"
+>
+    🌙
+</button>
+
+    </header>
+
+
+
+    <!-- MAIN SEARCH AREA -->
+
+    <main class="search-main">
+
+
+        <div class="search-intro">
+
+            <p class="search-eyebrow">
+                EXPLORE STUDY MATERIALS
+            </p>
+
+            <h1>
+                What are you looking for?
+            </h1>
+
+            <p>
+                Search books, notes, PYQs and other
+                resources shared by students.
+            </p>
+
+        </div>
+
+
+
+        <!-- LARGE SEARCH BOX -->
+
+        <div class="search-page-box">
+
+            <span class="search-page-icon">
+                🔍
+            </span>
+
+
+            <input
+                type="search"
+                id="fullSearchInput"
+                placeholder="Search books, notes, PYQs, subjects..."
+                autocomplete="off"
+                autofocus
+            >
+
+
+            <button
+                type="button"
+                id="clearSearchPage"
+                class="search-clear-btn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- POPULAR SEARCHES -->
+
+        <section
+            class="search-popular"
+            id="popularSection"
+        >
+
+            <div class="search-section-label">
+                🔥 Popular searches
+            </div>
+
+
+            <div class="search-chip-list">
+
+                <button
+                    type="button"
+                    class="search-chip"
+                    data-search="Engineering Maths"
+                >
+                    Engineering Maths
+                </button>
+
+
+                <button
+                    type="button"
+                    class="search-chip"
+                    data-search="DBMS"
+                >
+                    DBMS
+                </button>
+
+
+                <button
+                    type="button"
+                    class="search-chip"
+                    data-search="Operating Systems"
+                >
+                    Operating Systems
+                </button>
+
+
+                <button
+                    type="button"
+                    class="search-chip"
+                    data-search="Physics"
+                >
+                    Physics
+                </button>
+
+
+                <button
+                    type="button"
+                    class="search-chip"
+                    data-search="Computer Science"
+                >
+                    Computer Science
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RECENT SEARCHES -->
+
+        <section
+            class="recent-search-section"
+            id="recentSearchSection"
+        >
+
+            <div class="search-section-label">
+                🕘 Recent searches
+            </div>
+
+
+            <div
+                class="recent-search-list"
+                id="recentSearchList"
+            ></div>
+
+        </section>
+
+
+
+        <!-- RESULTS -->
+
+        <section
+            class="search-results-section"
+            id="searchResultsSection"
+        >
+
+            <div class="search-results-header">
+
+                <div>
+
+                    <p class="small-heading">
+                        SEARCH RESULTS
+                    </p>
+
+                    <h2 id="searchResultsTitle">
+                        Search for a resource
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="searchResultsCount"
+                    class="search-results-count"
+                >
+                    0 results
+                </span>
+
+            </div>
+
+
+            <div id="searchResults">
+
+                <div class="search-empty-state">
+
+                    <div class="search-empty-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Start searching
+                    </h3>
+
+                    <p>
+                        Type something above to find
+                        study materials.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <script
+        type="module"
+        src="search.js"
+    ></script>
+
+</body>
+
+</html>

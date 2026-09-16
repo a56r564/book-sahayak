@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Book Sahayak - Home</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-icon">
+            📚
+        </span>
+
+        <span>
+            Book Sahayak
+        </span>
+
+    </div>
+
+
+    <nav>
+    <a href="home.html">Home</a>
+    <a href="upload.html">List Resource</a>
+    <a href="my-materials.html">My Listings</a>
+
+    <a href="chats.html" class="nav-chat-link">
+        💬 Messages
+    </a>
+</nav>
+
+
+        <button
+            id="themeBtn"
+            class="theme-btn"
+        >
+            🌙 Dark
+        </button>
+
+
+        <!-- ACCOUNT -->
+
+        <div
+            class="account-menu"
+            id="accountMenu"
+        >
+
+            <button
+                type="button"
+                class="account-btn"
+                id="accountBtn"
+            >
+
+                <span class="account-avatar">
+                    👤
+                </span>
+
+                <span
+                    class="account-name"
+                    id="accountName"
+                >
+                    Account
+                </span>
+
+                <span class="account-arrow">
+                    ▾
+                </span>
+
+            </button>
+
+
+            <div
+                class="account-dropdown"
+                id="accountDropdown"
+            >
+
+                <div class="account-dropdown-header">
+
+                    <div class="account-large-avatar">
+                        👤
+                    </div>
+
+
+                    <div>
+
+                        <strong id="dropdownUserName">
+                            Student
+                        </strong>
+
+                        <span id="dropdownUserEmail">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-divider"></div>
+
+
+                <div class="account-info">
+
+                    <div class="account-info-row">
+
+                        <span>
+                            📧
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Email
+                            </small>
+
+                            <strong id="accountEmail">
+                                Loading...
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-info-row">
+
+                        <span>
+                            🔐
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Login
+                            </small>
+
+                            <strong>
+                                Firebase Authentication
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="dropdownLogoutBtn"
+                    class="dropdown-logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Keep the existing logout button hidden/unused
+             so we don't break existing JavaScript. -->
+
+        <button
+            id="logoutBtn"
+            class="logout-btn hidden-logout"
+        >
+            Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="marketplace-hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            🎓 MADE FOR COLLEGE STUDENTS
+        </div>
+
+
+        <h1>
+
+            Find what you need.
+
+            <br>
+
+            <span>
+                Share what you have.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Buy books, discover notes, find PYQs and share
+            useful study resources with students around you.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div
+            class="main-search"
+            onclick="window.location.href='search.html'"
+            role="button"
+            tabindex="0"
+            onkeydown="if(event.key === 'Enter' || event.key === ' ') window.location.href='search.html'"
+        >
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search books, notes, PYQs, subjects..."
+                autocomplete="off"
+                readonly
+            >
+
+
+            <button
+                type="button"
+                onclick="event.stopPropagation(); window.location.href='search.html'"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+        <div class="search-suggestions">
+
+            <span>
+                Popular:
+            </span>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='search.html?q=Engineering%20Maths'"
+            >
+                Engineering Maths
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='search.html?q=DBMS'"
+            >
+                DBMS
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='search.html?q=Operating%20Systems'"
+            >
+                Operating Systems
+            </button>
+
+
+            <button
+                type="button"
+                onclick="window.location.href='search.html?q=Physics'"
+            >
+                Physics
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="marketplace-main">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-card">
+
+        <div>
+
+            <p class="small-heading">
+                YOUR DASHBOARD
+            </p>
+
+
+            <h2 id="welcomeMessage">
+                Welcome!
+            </h2>
+
+
+            <p>
+                Explore resources shared by your fellow students.
+            </p>
+
+        </div>
+
+
+        <button
+            class="list-resource-btn"
+            id="uploadBtn"
+        >
+
+            <span>
+                ＋
+            </span>
+
+            List a Resource
+
+        </button>
+
+    </section>
+
+
+
+    <!-- CATEGORIES -->
+
+    <section class="category-section">
+
+        <div class="section-title-row">
+
+            <div>
+
+                <p class="small-heading">
+                    EXPLORE
+                </p>
+
+
+                <h2>
+                    Browse Categories
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+            <!-- BOOKS -->
+
+            <button
+                type="button"
+                class="category-card"
+                onclick="window.location.href='search.html?q=Books'"
+            >
+
+                <div class="category-icon books">
+                    📚
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Books
+                    </strong>
+
+                    <span>
+                        Textbooks & guides
+                    </span>
+
+                </div>
+
+
+                <b>
+                    →
+                </b>
+
+            </button>
+
+
+
+            <!-- NOTES -->
+
+            <button
+                type="button"
+                class="category-card"
+                onclick="window.location.href='search.html?q=Notes'"
+            >
+
+                <div class="category-icon notes">
+                    📝
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Notes
+                    </strong>
+
+                    <span>
+                        Class & revision notes
+                    </span>
+
+                </div>
+
+
+                <b>
+                    →
+                </b>
+
+            </button>
+
+
+
+            <!-- PYQs -->
+
+            <button
+                type="button"
+                class="category-card"
+                onclick="window.location.href='search.html?q=PYQs'"
+            >
+
+                <div class="category-icon pyq">
+                    📄
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        PYQs
+                    </strong>
+
+                    <span>
+                        Previous year papers
+                    </span>
+
+                </div>
+
+
+                <b>
+                    →
+                </b>
+
+            </button>
+
+
+
+            <!-- LAB FILES -->
+
+            <button
+                type="button"
+                class="category-card"
+                onclick="window.location.href='search.html?q=Lab%20Files'"
+            >
+
+                <div class="category-icon lab">
+                    💻
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Lab Files
+                    </strong>
+
+                    <span>
+                        Practical resources
+                    </span>
+
+                </div>
+
+
+                <b>
+                    →
+                </b>
+
+            </button>
+
+
+
+            <!-- OTHER -->
+
+            <button
+                type="button"
+                class="category-card"
+                onclick="window.location.href='search.html?q=Other'"
+            >
+
+                <div class="category-icon other">
+                    🎓
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Other
+                    </strong>
+
+                    <span>
+                        Useful study material
+                    </span>
+
+                </div>
+
+
+                <b>
+                    →
+                </b>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LISTINGS -->
+
+    <section class="listing-section">
+
+
+        <div class="listing-header">
+
+            <div>
+
+                <p class="small-heading">
+                    FRESH FROM STUDENTS
+                </p>
+
+
+                <h2>
+                    Latest Resources
+                </h2>
+
+            </div>
+
+
+            <span class="listing-count">
+                Recently added
+            </span>
+
+        </div>
+
+
+        <!-- Firebase materials will appear here -->
+
+        <div id="materialsList">
+
+            <div class="loading-card">
+
+                <div class="loading-icon">
+                    📚
+                </div>
+
+
+                <h3>
+                    Loading resources...
+                </h3>
+
+
+                <p>
+                    Finding the latest resources for you.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- BOTTOM CTA -->
+
+    <section class="bottom-cta">
+
+
+        <div>
+
+            <span class="cta-icon">
+                📖
+            </span>
+
+
+            <div>
+
+                <h2>
+                    Have books or notes you don't need?
+                </h2>
+
+
+                <p>
+                    Share them with another student and help
+                    someone in your college community.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="bottomUploadBtn"
+            onclick="window.location.href='upload.html'"
+        >
+            List a Resource →
+        </button>
+
+    </section>
+
+
+</main>
+
+
+
+<footer class="site-footer">
+
+
+    <div>
+
+        📚
+
+        <strong>
+            Book Sahayak
+        </strong>
+
+    </div>
+
+
+    <p>
+        A simple marketplace for students.
+    </p>
+
+
+</footer>
+
+
+
+<script
+    type="module"
+    src="home.js"
+></script>
+
+
+</body>
+
+</html>

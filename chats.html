@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Chats - Book Sahayak</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="chats-page">
+
+    <!-- HEADER -->
+    <header class="site-header chats-site-header">
+
+        <div class="brand">
+            <span class="brand-icon">📚</span>
+            <span>Book Sahayak</span>
+        </div>
+
+        <nav class="chats-nav">
+            <a href="home.html">Home</a>
+            <a href="list.html">List Resource</a>
+            <a href="my-listings.html">My Listings</a>
+        </nav>
+
+        <div class="chats-header-actions">
+
+            <button
+                id="themeToggle"
+                class="theme-btn"
+                type="button"
+            >
+                ☀️ Light Mode
+            </button>
+
+            <button
+                id="backBtn"
+                class="profile-btn"
+                type="button"
+            >
+                ← Back
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="chats-main">
+
+        <section class="chats-wrapper">
+
+            <!-- PAGE TITLE -->
+            <div class="chats-page-title">
+
+                <div>
+
+                    <span class="section-label">
+                        BOOK SAHAYAK
+                    </span>
+
+                    <h1>
+                        My Chats
+                    </h1>
+
+                    <p>
+                        Connect with buyers and sellers about study resources.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="chat-search-box">
+
+                <span class="chat-search-icon">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="chatSearch"
+                    placeholder="Search conversations..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- CHAT LIST -->
+            <section class="conversations-section">
+
+                <div class="conversations-header">
+
+                    <div>
+                        <h2>
+                            Conversations
+                        </h2>
+
+                        <p>
+                            Your recent conversations
+                        </p>
+                    </div>
+
+                    <span
+                        id="chatCount"
+                        class="chat-count"
+                    >
+                        0 chats
+                    </span>
+
+                </div>
+
+
+                <!-- LOADING -->
+                <div
+                    id="chatsLoading"
+                    class="chats-loading"
+                >
+
+                    <div class="chats-spinner"></div>
+
+                    <p>
+                        Loading conversations...
+                    </p>
+
+                </div>
+
+
+                <!-- CHAT LIST -->
+                <div
+                    id="chatsList"
+                    class="chats-list"
+                >
+                </div>
+
+
+                <!-- EMPTY -->
+                <div
+                    id="chatsEmpty"
+                    class="chats-empty"
+                    style="display:none;"
+                >
+
+                    <div class="empty-chat-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        No conversations yet
+                    </h3>
+
+                    <p>
+                        Start a conversation with a buyer or seller
+                        from any resource listing.
+                    </p>
+
+                    <button
+                        id="browseMaterialsBtn"
+                        class="chats-primary-btn"
+                        type="button"
+                    >
+                        Browse Resources
+                    </button>
+
+                </div>
+
+
+                <!-- NO SEARCH RESULTS -->
+                <div
+                    id="noSearchResults"
+                    class="chats-empty"
+                    style="display:none;"
+                >
+
+                    <div class="empty-chat-icon">
+                        🔍
+                    </div>
+
+                    <h3>
+                        No conversations found
+                    </h3>
+
+                    <p>
+                        Try searching for a different name or resource.
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+                <div
+                    id="chatsError"
+                    class="chats-error"
+                    style="display:none;"
+                >
+
+                    <div class="empty-chat-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Unable to load chats
+                    </h3>
+
+                    <p id="chatsErrorMessage">
+                        Something went wrong.
+                    </p>
+
+                    <button
+                        id="retryChatsBtn"
+                        class="chats-primary-btn"
+                        type="button"
+                    >
+                        Try Again
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="chats.js"></script>
+
+</body>
+
+</html>

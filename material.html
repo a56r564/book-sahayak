@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Book Sahayak - Material</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="material-page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="material-header">
+
+        <button
+            type="button"
+            class="material-back-top"
+            id="backBtn"
+            aria-label="Back to Home"
+        >
+            ←
+        </button>
+
+
+        <div class="material-brand">
+
+            <span>📚</span>
+
+            <strong>
+                Book Sahayak
+            </strong>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="material-theme-btn"
+            id="materialThemeBtn"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="material-main">
+
+
+        <div class="material-breadcrumb">
+            <span>HOME</span>
+            <span>›</span>
+            <span>MATERIAL</span>
+        </div>
+
+
+        <section class="material-card">
+
+
+            <!-- MATERIAL TOP -->
+
+            <div class="material-card-top">
+
+                <div class="material-category-icon">
+                    📖
+                </div>
+
+                <span class="material-type-badge">
+                    STUDY MATERIAL
+                </span>
+
+            </div>
+
+
+
+            <!-- TITLE -->
+
+            <h1 id="materialTitle">
+                Material
+            </h1>
+
+
+
+            <!-- SUBJECT -->
+
+            <div class="material-subject-box">
+
+                <span class="material-info-icon">
+                    📚
+                </span>
+
+                <div>
+
+                    <span class="material-label">
+                        SUBJECT
+                    </span>
+
+                    <p id="materialSubject">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="material-description-box">
+
+                <span class="material-label">
+                    DESCRIPTION
+                </span>
+
+                <p id="materialDescription">
+                </p>
+
+            </div>
+            <!-- PRICE / AVAILABILITY -->
+
+<div class="material-price-box">
+
+    <div class="material-price-icon">
+        💰
+    </div>
+
+    <div>
+
+        <span class="material-label">
+            AVAILABILITY
+        </span>
+
+        <p id="materialPrice">
+            FREE
+        </p>
+
+    </div>
+
+</div>
+
+
+
+            <!-- UPLOADER -->
+
+<div class="material-seller-box">
+
+    <div class="material-seller-heading">
+
+        <span>
+            👤
+        </span>
+
+        <h2>
+            Uploaded by
+        </h2>
+
+    </div>
+
+    <div
+        id="materialUploader"
+        class="material-uploader"
+    >
+    </div>
+
+    <button
+        type="button"
+        id="messageSellerBtn"
+        class="message-seller-btn"
+    >
+        💬 Message Seller
+    </button>
+
+</div>
+
+
+            <!-- FILE -->
+
+            <div class="material-file-section">
+
+                <div>
+
+                    <span class="material-file-icon">
+                        📄
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Study Material File
+                        </strong>
+
+                        <p>
+                            Open or download the shared file
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    id="viewFileBtn"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="material-view-btn"
+                >
+                    View / Download
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- BACK BUTTON -->
+
+        <button
+            type="button"
+            class="material-home-btn"
+            onclick="window.location.href='home.html'"
+        >
+            ← Back to Home
+        </button>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         DARK MODE
+    ========================== -->
+
+    <script>
+
+        const materialThemeBtn =
+            document.getElementById(
+                "materialThemeBtn"
+            );
+
+
+        function applyMaterialTheme() {
+
+            const savedTheme =
+                localStorage.getItem(
+                    "bookSahayakTheme"
+                );
+
+
+            const isDark =
+                savedTheme === "dark";
+
+
+            document.body.classList.toggle(
+                "dark-mode",
+                isDark
+            );
+
+
+            if (materialThemeBtn) {
+
+                materialThemeBtn.textContent =
+                    isDark
+                        ? "☀️"
+                        : "🌙";
+
+            }
+
+        }
+
+
+        applyMaterialTheme();
+
+
+        if (materialThemeBtn) {
+
+            materialThemeBtn.addEventListener(
+                "click",
+                function () {
+
+                    const isDark =
+                        !document.body.classList.contains(
+                            "dark-mode"
+                        );
+
+
+                    document.body.classList.toggle(
+                        "dark-mode",
+                        isDark
+                    );
+
+
+                    localStorage.setItem(
+                        "bookSahayakTheme",
+                        isDark
+                            ? "dark"
+                            : "light"
+                    );
+
+
+                    materialThemeBtn.textContent =
+                        isDark
+                            ? "☀️"
+                            : "🌙";
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <script
+        type="module"
+        src="material.js"
+    ></script>
+
+</body>
+
+</html>
