@@ -70,6 +70,7 @@
                 <button
                     type="button"
                     id="chatMoreBtn"
+                    data-chat-action="menu"
                     class="chat-action-btn"
                     aria-label="More options"
                     title="More options"
@@ -82,6 +83,7 @@
                 <button
                     type="button"
                     id="themeBtn"
+                    data-chat-action="theme"
                     class="chat-theme-btn"
                     aria-label="Toggle theme"
                     title="Toggle theme"
@@ -157,6 +159,7 @@
         <button
             type="button"
             id="messageOptionsBtn"
+            data-chat-action="menu"
             class="attachment-btn"
             aria-label="Message options"
             title="Message options"
@@ -199,26 +202,14 @@
              CHAT OPTIONS MENU
         ====================================== -->
 
-        <div
-            id="chatMenu"
-            class="chat-menu"
-            aria-hidden="true"
-        >
+        <div id="chatMenu" class="chat-menu" aria-hidden="true">
+            <button type="button" id="clearChatBtn">🗑️ Clear chat</button>
+            <button type="button" id="closeChatMenuBtn">✕ Close</button>
+        </div>
 
-            <button
-                type="button"
-                id="clearChatBtn"
-            >
-                🗑️ Clear chat
-            </button>
-
-            <button
-                type="button"
-                id="closeChatMenuBtn"
-            >
-                ✕ Close
-            </button>
-
+        <div id="messageOptionsMenu" class="message-options-menu" aria-hidden="true">
+            <button type="button" id="emojiOptionBtn">😊 Add emoji</button>
+            <button type="button" id="clearDraftBtn">🧹 Clear draft</button>
         </div>
 
 

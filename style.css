@@ -10742,44 +10742,272 @@ body.dark-mode .my-materials-home-btn,
   position: relative !important;
   z-index: 1 !important;
 }
+
 /* =========================================================
-   CHAT SCREEN CLICKABILITY & Z-INDEX FIX
+   DEFINITIVE CHAT CONTROLS OVERRIDE
 ========================================================= */
-
-/* Ensure the top header sits above the chat scroll container */
-.chat-header {
-  position: relative !important;
-  z-index: 100 !important;
-  pointer-events: auto !important;
+.chat-page .chat-header,
+.chat-page .message-composer-wrapper {
+    pointer-events: auto !important;
 }
 
-/* Ensure the bottom composer sits above the chat scroll container */
-.message-composer-wrapper {
-  position: relative !important;
-  z-index: 100 !important;
-  pointer-events: auto !important;
+.chat-page #chatMoreBtn,
+.chat-page #themeBtn,
+.chat-page #messageOptionsBtn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1000000 !important;
 }
 
-/* Force all chat buttons to receive mouse click events directly */
-.chat-back-btn,
-.chat-action-btn,
-.chat-theme-btn,
-.attachment-btn,
-.send-message-btn,
-#backBtn,
-#chatSearchBtn,
-#chatMoreBtn,
-#themeBtn,
-#messageOptionsBtn,
-#sendBtn {
-  position: relative !important;
-  z-index: 101 !important;
-  pointer-events: auto !important;
-  cursor: pointer !important;
+.chat-page #chatMenu {
+    position: fixed !important;
+    top: 75px !important;
+    right: 20px !important;
+    width: 210px !important;
+    min-width: 210px !important;
+    display: none !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    padding: 8px !important;
+    background: #182235 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,.45) !important;
+    z-index: 2000000 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
 }
 
-/* Restrict the messages area so it stays behind header & footer */
-.chat-main {
-  position: relative !important;
-  z-index: 1 !important;
+.chat-page #chatMenu.active,
+.chat-page #chatMenu.chat-menu-open {
+    display: flex !important;
+}
+
+.chat-page #chatMenu button {
+    width: 100% !important;
+    min-height: 42px !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    color: #fff !important;
+    text-align: left !important;
+    padding: 11px 14px !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+.chat-page #chatMenu button:hover {
+    background: rgba(255,255,255,.09) !important;
+}
+
+/* Visible light theme for the chat page. */
+.chat-page.light-theme,
+body.chat-page.light-theme {
+    background: #f5f7fb !important;
+    color: #172033 !important;
+}
+
+body.chat-page.light-theme .chat-app {
+    background: #f5f7fb !important;
+}
+
+body.chat-page.light-theme .chat-header {
+    background: #ffffff !important;
+    border-bottom-color: #dbe3ee !important;
+}
+
+body.chat-page.light-theme .chat-material {
+    background: #ffffff !important;
+    border-bottom-color: #dbe3ee !important;
+}
+
+body.chat-page.light-theme .chat-main,
+body.chat-page.light-theme .messages-container {
+    background: #f5f7fb !important;
+}
+
+body.chat-page.light-theme .message-composer-wrapper {
+    background: #ffffff !important;
+    border-top-color: #dbe3ee !important;
+}
+
+body.chat-page.light-theme .message-input-wrapper,
+body.chat-page.light-theme #messageInput {
+    background: #eef2f7 !important;
+    color: #172033 !important;
+}
+
+body.chat-page.light-theme #messageInput::placeholder {
+    color: #718096 !important;
+}
+
+body.chat-page.light-theme .chat-page .chat-user-details strong,
+body.chat-page.light-theme .chat-user-details strong {
+    color: #172033 !important;
+}
+
+body.chat-page.light-theme .chat-user-details span {
+    color: #64748b !important;
+}
+
+body.chat-page.light-theme #chatMenu {
+    background: #ffffff !important;
+    border-color: #dbe3ee !important;
+}
+
+body.chat-page.light-theme #chatMenu button {
+    color: #172033 !important;
+}
+
+body.chat-page.light-theme #chatMenu button:hover {
+    background: #eef2f7 !important;
+}
+
+/* =========================================================
+   BOOK SAHAYAK CHAT CONTROLS - CLEAN FINAL OVERRIDE
+   ========================================================= */
+.chat-page #chatSearchBtn,
+.chat-page #chatMoreBtn,
+.chat-page #themeBtn,
+.chat-page #messageOptionsBtn,
+.chat-page #sendBtn {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.chat-page #chatMenu,
+.chat-page #messageOptionsMenu {
+    display: none !important;
+    position: fixed !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 8px !important;
+    width: 210px !important;
+    box-sizing: border-box !important;
+    background: #182235 !important;
+    border: 1px solid #334155 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,.45) !important;
+    z-index: 1000000 !important;
+}
+
+.chat-page #chatMenu {
+    top: 72px !important;
+    right: 18px !important;
+}
+
+.chat-page #messageOptionsMenu {
+    left: 12px !important;
+    bottom: 76px !important;
+}
+
+.chat-page #chatMenu.active,
+.chat-page #messageOptionsMenu.active {
+    display: flex !important;
+}
+
+.chat-page #chatMenu button,
+.chat-page #messageOptionsMenu button {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 10px 13px !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    color: #fff !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+}
+
+.chat-page #chatMenu button:hover,
+.chat-page #messageOptionsMenu button:hover {
+    background: rgba(255,255,255,.09) !important;
+}
+
+/* Search must be above the header and must not be hidden by old rules. */
+.chat-page #chatSearchBar {
+    display: none !important;
+    position: fixed !important;
+    top: 12px !important;
+    right: 72px !important;
+    width: min(360px, calc(100vw - 88px)) !important;
+    height: 46px !important;
+    box-sizing: border-box !important;
+    z-index: 1000001 !important;
+}
+
+.chat-page #chatSearchBar.active {
+    display: flex !important;
+}
+
+/* Mobile: keep the composer above the keyboard and make the send target touch-safe. */
+@media (max-width: 768px) {
+    .chat-page .message-composer-wrapper {
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        z-index: 1000002 !important;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom)) !important;
+        box-sizing: border-box !important;
+    }
+
+    .chat-page .message-input-area {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 7px !important;
+    }
+
+    .chat-page #messageInput {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: auto !important;
+        height: 44px !important;
+        font-size: 16px !important;
+        -webkit-appearance: none !important;
+    }
+
+    .chat-page #messageOptionsBtn,
+    .chat-page #sendBtn {
+        flex: 0 0 44px !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        height: 44px !important;
+        position: relative !important;
+        z-index: 1000003 !important;
+        touch-action: manipulation !important;
+    }
+
+    .chat-page .chat-main {
+        min-height: 0 !important;
+    }
+
+    .chat-page .messages-container {
+        padding-bottom: 76px !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .chat-page #chatSearchBar {
+        top: 8px !important;
+        left: 8px !important;
+        right: 8px !important;
+        width: calc(100vw - 16px) !important;
+    }
+
+    .chat-page #chatMenu {
+        top: 64px !important;
+        right: 10px !important;
+    }
+
+    .chat-page #messageOptionsMenu {
+        left: 10px !important;
+        bottom: 68px !important;
+    }
 }

@@ -87,6 +87,15 @@ const clearChatBtn =
 const closeChatMenuBtn =
     document.getElementById("closeChatMenuBtn");
 
+const messageOptionsMenu =
+    document.getElementById("messageOptionsMenu");
+
+const emojiOptionBtn =
+    document.getElementById("emojiOptionBtn");
+
+const clearDraftBtn =
+    document.getElementById("clearDraftBtn");
+
 
 /* =========================================================
     VARIABLES
@@ -1034,54 +1043,6 @@ function performMessageSearch() {
 
 
 /* =========================================================
-    OPEN SEARCH
-========================================================= */
-
-if (chatSearchBtn) {
-
-    chatSearchBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-
-            if (!chatSearchBar) {
-                return;
-            }
-
-
-            chatSearchBar.classList.add(
-                "active"
-            );
-
-
-            chatSearchBar.style.display =
-                "flex";
-
-
-            if (chatSearchInput) {
-
-                chatSearchInput.value = "";
-
-                setTimeout(
-                    function () {
-
-                        chatSearchInput.focus();
-
-                    },
-                    100
-                );
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
     SEARCH INPUT
 ========================================================= */
 
@@ -1162,245 +1123,6 @@ if (closeSearchBtn) {
     );
 
 }
-
-
-/* =========================================================
-    CHAT MENU
-========================================================= */
-
-function openChatMenu() {
-
-    if (!chatMenu) {
-
-        console.error(
-            "chatMenu not found"
-        );
-
-        return;
-    }
-
-
-    chatMenu.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    chatMenu.classList.add(
-        "active"
-    );
-
-
-    chatMenu.style.display =
-        "flex";
-
-
-    console.log(
-        "✓ Chat menu opened"
-    );
-}
-
-
-function closeChatMenu() {
-
-    if (!chatMenu) {
-        return;
-    }
-
-
-    chatMenu.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-
-    chatMenu.classList.remove(
-        "active"
-    );
-
-
-    chatMenu.style.display =
-        "none";
-}
-
-
-/* =========================================================
-    GLOBAL TOGGLE
-    Used by the bottom message-options button
-========================================================= */
-
-window.toggleChatMenu =
-    function (event) {
-
-        if (event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-        }
-
-
-        if (!chatMenu) {
-
-            console.error(
-                "chatMenu not found"
-            );
-
-            return;
-        }
-
-
-        const isOpen =
-            chatMenu.classList.contains(
-                "active"
-            );
-
-
-        if (isOpen) {
-
-            closeChatMenu();
-
-        } else {
-
-            openChatMenu();
-
-        }
-
-    };
-
-
-/* =========================================================
-    TOP RIGHT MORE BUTTON
-========================================================= */
-
-if (chatMoreBtn) {
-
-    chatMoreBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            window.toggleChatMenu(
-                event
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-    BOTTOM MESSAGE OPTIONS BUTTON
-========================================================= */
-
-if (messageOptionsBtn) {
-
-    messageOptionsBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            window.toggleChatMenu(
-                event
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-    CLOSE MENU BUTTON
-========================================================= */
-
-if (closeChatMenuBtn) {
-
-    closeChatMenuBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            closeChatMenu();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-    CLICK OUTSIDE MENU
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function (event) {
-
-        if (!chatMenu) {
-            return;
-        }
-
-
-        const clickedInsideMenu =
-            chatMenu.contains(
-                event.target
-            );
-
-
-        const clickedMoreButton =
-            chatMoreBtn &&
-            chatMoreBtn.contains(
-                event.target
-            );
-
-
-        const clickedOptionsButton =
-            messageOptionsBtn &&
-            messageOptionsBtn.contains(
-                event.target
-            );
-
-
-        if (
-            !clickedInsideMenu &&
-            !clickedMoreButton &&
-            !clickedOptionsButton
-        ) {
-
-            closeChatMenu();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-    ESCAPE KEY
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeChatMenu();
-
-        }
-
-    }
-);
 
 
 /* =========================================================
@@ -1554,71 +1276,6 @@ if (clearChatBtn) {
         }
     );
 
-}
-
-
-/* =========================================================
-    THEME
-========================================================= */
-
-if (themeBtn) {
-
-    themeBtn.addEventListener(
-        "click",
-        function () {
-
-            document.body.classList.toggle(
-                "light-theme"
-            );
-
-
-            const isLight =
-                document.body.classList.contains(
-                    "light-theme"
-                );
-
-
-            themeBtn.textContent =
-                isLight
-                    ? "☀️"
-                    : "🌙";
-
-
-            localStorage.setItem(
-                "chatTheme",
-                isLight
-                    ? "light"
-                    : "dark"
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-    LOAD SAVED THEME
-========================================================= */
-
-const savedTheme =
-    localStorage.getItem(
-        "chatTheme"
-    );
-
-
-if (savedTheme === "light") {
-
-    document.body.classList.add(
-        "light-theme"
-    );
-
-
-    if (themeBtn) {
-
-        themeBtn.textContent =
-            "☀️";
-    }
 }
 
 
@@ -1885,3 +1542,103 @@ console.log(
     "Material ID:",
     materialId
 );
+
+/* =========================================================
+   FINAL CHAT ACTION CONTROLS
+   One handler per control; header More and composer Options
+   intentionally open different menus.
+========================================================= */
+(function installChatControls() {
+    const menu = document.getElementById("chatMenu");
+    const optionsMenu = document.getElementById("messageOptionsMenu");
+    const searchBar = document.getElementById("chatSearchBar");
+    const searchBtn = document.getElementById("chatSearchBtn");
+    const moreBtn = document.getElementById("chatMoreBtn");
+    const optionsBtn = document.getElementById("messageOptionsBtn");
+    const theme = document.getElementById("themeBtn");
+    const input = document.getElementById("messageInput");
+
+    function show(el) {
+        if (!el) return;
+        el.classList.add("active");
+        el.setAttribute("aria-hidden", "false");
+    }
+    function hide(el) {
+        if (!el) return;
+        el.classList.remove("active");
+        el.setAttribute("aria-hidden", "true");
+    }
+    function hideMenus() { hide(menu); hide(optionsMenu); }
+
+    function toggleTheme(e) {
+        e.preventDefault(); e.stopPropagation();
+        const light = document.body.classList.toggle("light-theme");
+        if (theme) theme.textContent = light ? "☀️" : "🌙";
+        try { localStorage.setItem("chatTheme", light ? "light" : "dark"); } catch (_) {}
+    }
+
+    searchBtn?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        hideMenus();
+        if (searchBar) {
+            searchBar.classList.add("active");
+            searchBar.style.display = "flex";
+            setTimeout(() => document.getElementById("chatSearchInput")?.focus(), 50);
+        }
+    });
+
+    moreBtn?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        hide(optionsMenu);
+        if (menu?.classList.contains("active")) hide(menu); else show(menu);
+    });
+
+    optionsBtn?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        hide(menu);
+        if (optionsMenu?.classList.contains("active")) hide(optionsMenu); else show(optionsMenu);
+    });
+
+    theme?.addEventListener("click", toggleTheme);
+
+    document.getElementById("closeChatMenuBtn")?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation(); hide(menu);
+    });
+
+    clearDraftBtn?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        if (input) { input.value = ""; input.focus(); }
+        hide(optionsMenu);
+    });
+
+    emojiOptionBtn?.addEventListener("click", e => {
+        e.preventDefault(); e.stopPropagation();
+        if (input) { input.value += (input.value ? " " : "") + "😊"; input.focus(); }
+        hide(optionsMenu);
+    });
+
+    document.addEventListener("click", e => {
+        if (menu && !menu.contains(e.target) && !moreBtn?.contains(e.target)) hide(menu);
+        if (optionsMenu && !optionsMenu.contains(e.target) && !optionsBtn?.contains(e.target)) hide(optionsMenu);
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") { hideMenus(); }
+    });
+
+    let touchSending = false;
+    sendBtn?.addEventListener("touchend", async e => {
+        e.preventDefault();
+        if (touchSending) return;
+        touchSending = true;
+        try { sendBtn.click(); } finally { setTimeout(() => { touchSending = false; }, 400); }
+    }, { passive: false });
+
+    try {
+        const saved = localStorage.getItem("chatTheme");
+        if (saved === "light") {
+            document.body.classList.add("light-theme");
+            if (theme) theme.textContent = "☀️";
+        }
+    } catch (_) {}
+})();
