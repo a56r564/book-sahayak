@@ -993,6 +993,13 @@ async function deleteChatForMe(
             }
         );
 
+        /* Remove it from the in-memory list as well. */
+        allChats = allChats.filter(
+            function (item) {
+                return item.id !== chatId;
+            }
+        );
+
 
         card.style.opacity =
             "0";
