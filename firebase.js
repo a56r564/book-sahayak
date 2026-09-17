@@ -151,12 +151,12 @@ function watchUnreadMessages(userId) {
       if (receivedInitialSnapshot) {
         snapshot.docChanges().forEach((change) => {
           const chat = change.doc.data();
-          const hasNewUnreadMessage =
+          const hasNewIncomingMessage =
             (change.type === "added" || change.type === "modified") &&
             chat.lastMessageSenderId !== userId &&
-            Number(chat.unreadCounts?.[userId] || 0) > 0;
+            Boolean(chat.lastMessage);
 
-          if (hasNewUnreadMessage) {
+          if (hasNewIncomingMessage) {
             showMessageToast(chat);
           }
         });
