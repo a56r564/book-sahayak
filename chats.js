@@ -752,6 +752,33 @@ async function loadChats() {
                 }
 
 
+                /* =================================================
+                   HIDE CHATS DELETED FOR CURRENT USER
+                ================================================= */
+
+                const hiddenFor =
+                    Array.isArray(
+                        data.hiddenFor
+                    )
+                        ? data.hiddenFor
+                        : [];
+
+
+                if (
+                    hiddenFor.includes(
+                        currentUser.uid
+                    )
+                ) {
+
+                    console.log(
+                        "SKIPPING HIDDEN CHAT:",
+                        docSnapshot.id
+                    );
+
+                    return;
+                }
+
+
                 allChats.push({
 
                     id:
@@ -994,6 +1021,14 @@ async function deleteChatForMe(
         );
 
 
+        allChats =
+            allChats.filter(
+                function (item) {
+                    return item.id !== chatId;
+                }
+            );
+
+
         card.style.opacity =
             "0";
 
@@ -1016,7 +1051,6 @@ async function deleteChatForMe(
                 ) {
 
                     if (chatsEmpty) {
-
                         chatsEmpty.style.display =
                             "flex";
                     }
