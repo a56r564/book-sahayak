@@ -99,8 +99,35 @@ function showUnreadMessages(count) {
   });
 }
 
+function showMessageToast(chat) {
+  const senderName = chat.lastMessageSenderName || "Someone";
+  const messageText = chat.lastMessage || "sent you a message";
+  const existingToast = document.querySelector(".message-notification-toast");
+
+  existingToast?.remove();
+
+  const toast = document.createElement("button");
+  const title = document.createElement("strong");
+  const preview = document.createElement("span");
+
+  toast.type = "button";
+  toast.className = "message-notification-toast";
+  title.textContent = `💬 New message from ${senderName}`;
+  preview.textContent = messageText;
+  toast.append(title, preview);
+  toast.addEventListener("click", () => {
+    window.location.href = "chats.html";
+  });
+
+  document.body.appendChild(toast);
+
+  window.setTimeout(() => toast.remove(), 6000);
+}
+
 function watchUnreadMessages(userId) {
   stopWatchingUnreadMessages?.();
+
+  let receivedInitialSnapshot = false;
 
   stopWatchingUnreadMessages = onSnapshot(
     collection(db, "chats"),
@@ -120,6 +147,22 @@ function watchUnreadMessages(userId) {
       });
 
       showUnreadMessages(total);
+
+      if (receivedInitialSnapshot) {
+        snapshot.docChanges().forEach((change) => {
+          const chat = change.doc.data();
+          const hasNewUnreadMessage =
+            (change.type === "added" || change.type === "modified") &&
+            chat.lastMessageSenderId !== userId &&
+            Number(chat.unreadCounts?.[userId] || 0) > 0;
+
+          if (hasNewUnreadMessage) {
+            showMessageToast(chat);
+          }
+        });
+      }
+
+      receivedInitialSnapshot = true;
     },
     () => showUnreadMessages(0)
   );

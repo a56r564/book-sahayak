@@ -10050,8 +10050,45 @@ body.dark-mode .my-materials-home-btn,
     vertical-align: middle;
 }
 
+.unread-messages-badge[hidden] {
+    display: none !important;
+}
+
 .chat-card-top .chat-unread-badge {
     flex: 0 0 auto;
+}
+
+.message-notification-toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1000005;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: min(360px, calc(100vw - 44px));
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: #1f6feb;
+    color: #fff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    animation: message-toast-in 180ms ease-out;
+}
+
+.message-notification-toast span {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.9);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@keyframes message-toast-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
