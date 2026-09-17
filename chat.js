@@ -9,7 +9,8 @@ import {
     getDocs,
     deleteDoc,
     onSnapshot,
-    serverTimestamp
+    serverTimestamp,
+    increment
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 import {
@@ -812,7 +813,12 @@ async function sendMessage(chatId) {
                     getCurrentUserName(),
 
                 updatedAt:
-                    serverTimestamp()
+                    serverTimestamp(),
+
+                unreadCounts: {
+                    [currentUser.uid]: 0,
+                    [otherUserId]: increment(1)
+                }
 
             },
             {
@@ -1377,6 +1383,19 @@ async function initializeChat() {
 
         return;
     }
+
+    /* Mark messages as read when this participant opens the chat. */
+    await setDoc(
+        chat.chatRef,
+        {
+            unreadCounts: {
+                [currentUser.uid]: 0
+            }
+        },
+        {
+            merge: true
+        }
+    );
 
 
     /* UPDATE HEADER */

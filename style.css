@@ -10029,6 +10029,31 @@ body.dark-mode .my-materials-home-btn,
    MOBILE CHAT COMPOSER FIX
    ========================================================= */
 
+.unread-messages-badge,
+.chat-unread-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    margin-left: 6px;
+    border-radius: 999px;
+    background: #e53935;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.nav-chat-link .unread-messages-badge {
+    vertical-align: middle;
+}
+
+.chat-card-top .chat-unread-badge {
+    flex: 0 0 auto;
+}
+
 @media (max-width: 768px) {
 
     /* Keep the chat page within the mobile screen */

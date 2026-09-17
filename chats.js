@@ -408,6 +408,14 @@ function createChatCard(
         currentUser.uid;
 
 
+    const unreadCount =
+        Number(
+            chat.unreadCounts?.[
+                currentUser.uid
+            ] || 0
+        );
+
+
     let messagePreview =
         lastMessage;
 
@@ -443,6 +451,19 @@ function createChatCard(
                         chatTime
                     )}
                 </span>
+
+                ${
+                    unreadCount > 0
+                        ? `
+                            <span
+                                class="chat-unread-badge"
+                                aria-label="${unreadCount} unread messages"
+                            >
+                                ${unreadCount > 99 ? "99+" : unreadCount}
+                            </span>
+                        `
+                        : ""
+                }
 
             </div>
 
