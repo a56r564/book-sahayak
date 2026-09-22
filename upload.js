@@ -58,6 +58,65 @@ const isFree =
 const price =
     document.getElementById("price");
 
+const fileInput =
+    document.getElementById("file");
+
+const fileUpload =
+    document.querySelector(".file-upload");
+
+const fileIcon =
+    document.getElementById("fileIcon");
+
+const fileLabel =
+    document.getElementById("fileLabel");
+
+const fileHint =
+    document.getElementById("fileHint");
+
+
+/* FILE PICKER FEEDBACK */
+
+function formatFileSize(bytes) {
+
+    if (bytes < 1024 * 1024) {
+        return Math.ceil(bytes / 1024) + " KB";
+    }
+
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+
+}
+
+
+if (fileInput) {
+
+    fileInput.addEventListener("change", () => {
+
+        const selectedFile = fileInput.files[0];
+
+        if (!selectedFile) {
+            return;
+        }
+
+        fileUpload?.classList.add("file-selected");
+
+        if (fileIcon) {
+            fileIcon.textContent = "✓";
+        }
+
+        if (fileLabel) {
+            fileLabel.textContent = selectedFile.name;
+        }
+
+        if (fileHint) {
+            fileHint.textContent =
+                formatFileSize(selectedFile.size) +
+                " selected — click to change";
+        }
+
+    });
+
+}
+
 
 /* DARK MODE */
 
