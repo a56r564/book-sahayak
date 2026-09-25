@@ -422,6 +422,12 @@ if (submitListingBtn) {
                         currentUser.email ||
                         "",
 
+                    status: "pending",
+
+                    reviewedAt: null,
+
+                    reviewedBy: "",
+
                     createdAt:
                         serverTimestamp()
                 }
@@ -429,7 +435,7 @@ if (submitListingBtn) {
 
 
             message.textContent =
-                "Listing published successfully!";
+                "Listing submitted for admin review.";
 
 
             setTimeout(() => {

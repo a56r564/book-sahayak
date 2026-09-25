@@ -1,4 +1,4 @@
-import { db, auth } from "./firebase.js";
+import { db, auth, ADMIN_UID } from "./firebase.js";
 
 import {
     doc,
@@ -127,6 +127,29 @@ async function loadMaterial() {
 
         const material =
             materialDoc.data();
+
+        const isOwner =
+            currentUser &&
+            material.uploadedBy ===
+            currentUser.uid;
+
+        const isAdmin =
+            currentUser &&
+            currentUser.uid === ADMIN_UID;
+
+        if (
+            (material.status === "pending" ||
+                material.status === "rejected") &&
+            !isOwner &&
+            !isAdmin
+        ) {
+
+            title.textContent =
+                "Material not available.";
+
+            return;
+
+        }
 
 
         console.log(

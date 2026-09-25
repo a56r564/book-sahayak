@@ -3,6 +3,8 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import {
   doc,
   collection,
+  query,
+  where,
   getFirestore,
   onSnapshot,
   serverTimestamp,
@@ -21,6 +23,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+export const ADMIN_UID = "vPbcTv2GTMcvdrpVBrNiUDtjGuC3";
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
@@ -32,6 +35,7 @@ let activeUser = null;
 let heartbeatId = null;
 let stopWatchingPresence = null;
 let stopWatchingUnreadMessages = null;
+let presenceRefreshId = null;
 
 async function updatePresence(isOnline) {
   if (!activeUser) return;
@@ -57,19 +61,51 @@ function showChatPresence(userId) {
   if (!statusElement) return;
 
   stopWatchingPresence?.();
+  clearInterval(presenceRefreshId);
+
+  let latestPresence = null;
+
+  const renderPresence = () => {
+    const lastSeen = latestPresence?.lastSeen?.toDate?.();
+    const isRecentlyActive =
+      lastSeen && Date.now() - lastSeen.getTime() < PRESENCE_TIMEOUT_MS;
+    const isOnline = latestPresence?.isOnline === true && isRecentlyActive;
+
+    if (isOnline) {
+      statusElement.textContent = "Online";
+    } else if (lastSeen) {
+      const elapsedSeconds = Math.max(
+        0,
+        Math.floor((Date.now() - lastSeen.getTime()) / 1000)
+      );
+
+      if (elapsedSeconds < 60) {
+        statusElement.textContent = "Last seen just now";
+      } else if (elapsedSeconds < 3600) {
+        statusElement.textContent = `Last seen ${Math.floor(elapsedSeconds / 60)} min ago`;
+      } else if (elapsedSeconds < 86400) {
+        statusElement.textContent = `Last seen ${Math.floor(elapsedSeconds / 3600)} hr ago`;
+      } else {
+        statusElement.textContent = `Last seen ${lastSeen.toLocaleDateString([], {
+          day: "numeric",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit"
+        })}`;
+      }
+    } else {
+      statusElement.textContent = "Offline";
+    }
+
+    statusElement.classList.toggle("is-online", isOnline);
+    statusElement.classList.toggle("is-offline", !isOnline);
+  };
 
   stopWatchingPresence = onSnapshot(
     doc(db, "users", userId),
     (snapshot) => {
-      const presence = snapshot.data();
-      const lastSeen = presence?.lastSeen?.toDate?.();
-      const isRecentlyActive =
-        lastSeen && Date.now() - lastSeen.getTime() < PRESENCE_TIMEOUT_MS;
-      const isOnline = presence?.isOnline === true && isRecentlyActive;
-
-      statusElement.textContent = isOnline ? "Online" : "Offline";
-      statusElement.classList.toggle("is-online", isOnline);
-      statusElement.classList.toggle("is-offline", !isOnline);
+      latestPresence = snapshot.data();
+      renderPresence();
     },
     () => {
       statusElement.textContent = "Offline";
@@ -77,6 +113,8 @@ function showChatPresence(userId) {
       statusElement.classList.add("is-offline");
     }
   );
+
+  presenceRefreshId = setInterval(renderPresence, PRESENCE_HEARTBEAT_MS);
 }
 
 function showUnreadMessages(count) {
@@ -130,7 +168,10 @@ function watchUnreadMessages(userId) {
   let receivedInitialSnapshot = false;
 
   stopWatchingUnreadMessages = onSnapshot(
-    collection(db, "chats"),
+    query(
+      collection(db, "chats"),
+      where("participants", "array-contains", userId)
+    ),
     (snapshot) => {
       let total = 0;
 
@@ -177,6 +218,10 @@ onAuthStateChanged(auth, (user) => {
   if (!user) {
     const signedOutUser = activeUser;
     activeUser = null;
+    clearInterval(presenceRefreshId);
+    presenceRefreshId = null;
+    stopWatchingPresence?.();
+    stopWatchingPresence = null;
     stopWatchingUnreadMessages?.();
     stopWatchingUnreadMessages = null;
     showUnreadMessages(0);

@@ -6,7 +6,9 @@ import {
 
 import {
     collection,
-    getDocs
+    getDocs,
+    query,
+    where
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -146,9 +148,9 @@ async function loadMaterials() {
 
         const snapshot =
             await getDocs(
-                collection(
-                    db,
-                    "materials"
+                query(
+                    collection(db, "materials"),
+                    where("status", "==", "approved")
                 )
             );
 
@@ -159,12 +161,15 @@ async function loadMaterials() {
         snapshot.forEach(
             function (docSnapshot) {
 
+                const material =
+                    docSnapshot.data();
+
                 allMaterials.push({
 
                     id:
                         docSnapshot.id,
 
-                    ...docSnapshot.data()
+                    ...material
 
                 });
 

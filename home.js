@@ -1,4 +1,4 @@
-import { auth, db } from "./firebase.js";
+import { auth, db, ADMIN_UID } from "./firebase.js";
 
 import {
     onAuthStateChanged,
@@ -9,7 +9,9 @@ import {
     doc,
     getDoc,
     collection,
-    getDocs
+    getDocs,
+    query,
+    where
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -43,6 +45,9 @@ const materialsList =
 
 const listingCount =
     document.querySelector(".listing-count");
+
+const adminLink =
+    document.getElementById("adminLink");
 
 
 /* =========================
@@ -98,6 +103,13 @@ onAuthStateChanged(auth, async function (user) {
 
 
     currentUser = user;
+
+    if (adminLink) {
+
+        adminLink.hidden =
+            user.uid !== ADMIN_UID;
+
+    }
 
 
     /* =========================
@@ -499,9 +511,9 @@ async function loadMaterials() {
 
         const snapshot =
             await getDocs(
-                collection(
-                    db,
-                    "materials"
+                query(
+                    collection(db, "materials"),
+                    where("status", "==", "approved")
                 )
             );
 
@@ -512,11 +524,14 @@ async function loadMaterials() {
         snapshot.forEach(
             function (docSnapshot) {
 
+                const material =
+                    docSnapshot.data();
+
                 allMaterials.push({
 
                     id: docSnapshot.id,
 
-                    ...docSnapshot.data()
+                    ...material
 
                 });
 

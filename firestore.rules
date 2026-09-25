@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() &&
+        request.auth.uid == "vPbcTv2GTMcvdrpVBrNiUDtjGuC3";
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow update: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /materials/{materialId} {
+      allow get: if signedIn() && (
+        isAdmin() ||
+        resource.data.status == "approved" ||
+        resource.data.uploadedBy == request.auth.uid
+      );
+
+      allow list: if signedIn() && (
+        isAdmin() ||
+        resource.data.status == "approved" ||
+        resource.data.uploadedBy == request.auth.uid
+      );
+
+      allow create: if signedIn() &&
+        request.resource.data.uploadedBy == request.auth.uid &&
+        request.resource.data.status == "pending";
+
+      allow update: if isAdmin() || (
+        signedIn() &&
+        resource.data.uploadedBy == request.auth.uid &&
+        request.resource.data.uploadedBy == resource.data.uploadedBy &&
+        request.resource.data.status == resource.data.status &&
+        request.resource.data.reviewedBy == resource.data.reviewedBy &&
+        request.resource.data.reviewedAt == resource.data.reviewedAt
+      );
+
+      allow delete: if signedIn() &&
+        (isAdmin() || resource.data.uploadedBy == request.auth.uid);
+    }
+
+    match /chats/{chatId} {
+      // Chat access stays available to signed-in students. Material moderation
+      // above remains restricted to the administrator.
+      allow read, create, update: if signedIn();
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        allow read, create, update, delete: if signedIn();
+      }
+    }
+  }
+}

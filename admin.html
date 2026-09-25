@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Review - Book Sahayak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+    <header class="admin-header">
+        <a class="admin-brand" href="home.html"><span>📚</span> Book Sahayak</a>
+        <nav class="admin-nav"><a href="home.html">← Back to site</a></nav>
+    </header>
+    <main class="admin-main">
+        <section class="admin-hero">
+            <div>
+                <p class="admin-eyebrow">ADMIN CONTROL CENTER</p>
+                <h1>Review new listings</h1>
+                <p class="admin-description">Check each submission before it becomes visible to students.</p>
+            </div>
+            <div class="admin-shield">✓<span>Protected review</span></div>
+        </section>
+
+        <section class="admin-summary" aria-label="Review summary">
+            <article><span>Pending review</span><strong id="pendingCount">—</strong></article>
+            <article><span>Approved listings</span><strong id="approvedCount">—</strong></article>
+            <article><span>Legacy listings</span><strong id="legacyCount">—</strong></article>
+        </section>
+
+        <section class="admin-migration" id="migrationPanel" hidden>
+            <div><strong>Finish setup</strong><p>Your existing listings need an Approved status before secure rules are enabled.</p></div>
+            <button type="button" id="approveExistingBtn">Approve existing listings</button>
+        </section>
+
+        <div class="admin-section-heading">
+            <div><h2>Awaiting your decision</h2><p id="adminMessage" class="admin-message" aria-live="polite">Loading pending listings…</p></div>
+        </div>
+        <section id="pendingMaterials" class="admin-material-grid"></section>
+    </main>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -705,7 +705,7 @@ async function loadChats() {
 
 
         /* =================================================
-           GET ALL CHAT DOCUMENTS
+           GET CHAT HEADERS, THEN KEEP ONLY THIS USER'S CHATS
         ================================================= */
 
         const snapshot =

@@ -6,8 +6,6 @@ import {
     setDoc,
     collection,
     addDoc,
-    getDocs,
-    deleteDoc,
     onSnapshot,
     serverTimestamp,
     increment
@@ -109,6 +107,8 @@ let materialData = null;
 let otherPersonName = "User";
 
 let unsubscribeMessages = null;
+
+let clearedMessagesBefore = 0;
 
 
 /* =========================================================
@@ -428,27 +428,6 @@ async function updateHeader(chatRef) {
                 otherPersonName;
         }
 
-
-        const headerInfo =
-            document.querySelector(
-                ".chat-header-info"
-            );
-
-        if (headerInfo) {
-
-            const status =
-                headerInfo.querySelector(
-                    "span"
-                );
-
-            if (status) {
-
-                status.textContent =
-                    "You ↔ " +
-                    otherPersonName;
-            }
-        }
-
     }
     catch (error) {
 
@@ -464,7 +443,7 @@ async function updateHeader(chatRef) {
     LOAD REAL-TIME MESSAGES
 ========================================================= */
 
-function loadMessages(chatId) {
+async function loadMessages(chatId) {
 
     if (!messagesContainer) {
         return;
@@ -475,6 +454,35 @@ function loadMessages(chatId) {
         unsubscribeMessages();
 
         unsubscribeMessages = null;
+    }
+
+
+    /* A clear action hides only this user's older messages. */
+    try {
+
+        const chatSnapshot =
+            await getDoc(
+                doc(db, "chats", chatId)
+            );
+
+        const clearedAt =
+            chatSnapshot.data()?.clearedAtBy?.[
+                currentUser?.uid
+            ];
+
+        clearedMessagesBefore =
+            clearedAt?.toMillis?.() || 0;
+
+    }
+    catch (error) {
+
+        console.warn(
+            "Could not load cleared-chat state:",
+            error
+        );
+
+        clearedMessagesBefore = 0;
+
     }
 
 
@@ -555,7 +563,42 @@ function loadMessages(chatId) {
 
                 /* DISPLAY */
 
-                messages.forEach(
+                const visibleMessages =
+                    messages.filter(
+                    function (message) {
+
+                        const messageTime =
+                            message.createdAt?.toMillis?.() || 0;
+
+                        return (
+                            !clearedMessagesBefore ||
+                            !messageTime ||
+                            messageTime >
+                                clearedMessagesBefore
+                        );
+
+                    }
+                );
+
+
+                if (visibleMessages.length === 0) {
+
+                    messagesContainer.innerHTML = `
+                        <div class="chat-empty">
+                            <div style="font-size:36px; margin-bottom:10px;">
+                                💬
+                            </div>
+                            <strong>Chat cleared</strong>
+                            <p>New messages will appear here.</p>
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                visibleMessages.forEach(
                     function (message) {
 
                         renderMessage(
@@ -1184,44 +1227,6 @@ if (clearChatBtn) {
                     true;
 
 
-                const messagesRef =
-                    collection(
-                        db,
-                        "chats",
-                        chatId,
-                        "messages"
-                    );
-
-
-                const snapshot =
-                    await getDocs(
-                        messagesRef
-                    );
-
-
-                const deletePromises = [];
-
-
-                snapshot.forEach(
-                    function (messageDoc) {
-
-                        deletePromises.push(
-                            deleteDoc(
-                                messageDoc.ref
-                            )
-                        );
-
-                    }
-                );
-
-
-                await Promise.all(
-                    deletePromises
-                );
-
-
-                /* RESET CHAT LAST MESSAGE */
-
                 await setDoc(
                     doc(
                         db,
@@ -1230,20 +1235,30 @@ if (clearChatBtn) {
                     ),
                     {
 
-                        lastMessage: "",
-
-                        lastMessageSenderId: "",
-
-                        lastMessageSenderName: "",
-
-                        updatedAt:
-                            serverTimestamp()
+                        clearedAtBy: {
+                            [currentUser.uid]:
+                                serverTimestamp()
+                        }
 
                     },
                     {
                         merge: true
                     }
                 );
+
+
+                clearedMessagesBefore =
+                    Date.now();
+
+                messagesContainer.innerHTML = `
+                    <div class="chat-empty">
+                        <div style="font-size:36px; margin-bottom:10px;">
+                            💬
+                        </div>
+                        <strong>Chat cleared</strong>
+                        <p>New messages will appear here.</p>
+                    </div>
+                `;
 
 
                 closeChatMenu();

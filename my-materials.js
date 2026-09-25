@@ -233,6 +233,10 @@ onAuthStateChanged(
                     const materialId =
                         docSnapshot.id;
 
+                    const reviewStatus =
+                        material.status ||
+                        "approved";
+
 
                     const materialDiv =
                         document.createElement(
@@ -258,6 +262,14 @@ onAuthStateChanged(
 
                             <span class="my-material-badge">
                                 YOUR UPLOAD
+                            </span>
+
+                            <span class="my-material-status status-${escapeHTML(reviewStatus)}">
+                                ${escapeHTML(
+                                    reviewStatus === "pending"
+                                        ? "PENDING REVIEW"
+                                        : reviewStatus.toUpperCase()
+                                )}
                             </span>
 
                         </div>
@@ -286,6 +298,22 @@ onAuthStateChanged(
                                 "No description provided."
                             )}
                         </p>
+
+                        ${
+                            reviewStatus === "pending"
+                                ? `
+                                    <p class="my-material-review-note pending-note">
+                                        This listing is waiting for admin review.
+                                    </p>
+                                `
+                                : reviewStatus === "rejected"
+                                    ? `
+                                        <p class="my-material-review-note rejected-note">
+                                            This listing was rejected and is not visible to other students.
+                                        </p>
+                                    `
+                                    : ""
+                        }
 
 
                         <div class="my-material-actions">
